@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.kitp" name="KITP Videos" version="0.1" provider-name="garrison">
+  <requires>
+    <import addon="xbmc.python" version="2.20.0"/>
+    <import addon="script.module.six" version="1.11.0"/>
+    <import addon="script.module.requests" version="2.12.4"/>
+    <import addon="script.module.beautifulsoup4"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="resources/lib/main.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.python.module" library="resources/lib/"/>
+  <extension point="xbmc.addon.metadata">
+    <news>
+      0.1 (in progress) Initial release
+    </news>
+    <summary lang="en">KITP Videos</summary>
+    <description lang="en">The Kavli Institute for Theoretical Physics (KITP) is a research institute of the University of California, Santa Barbara. KITP is one of the most renowned institutes for theoretical physics in the world, and brings theorists in physics and related fields together to work on topics at the forefront of theoretical science.  This plugin provides access to KITP's library of online talks.</description>
+    <disclaimer lang="en">This plugin is not endorsed by KITP.</disclaimer>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+    <license>LGPL 2.1 or later</license>
+    <source>https://github.com/garrison/plugin.video.kitp</source>
+  </extension>
+</addon>
