@@ -24,10 +24,11 @@ class TalkInfo(LinkInfo):
         self.has_slides = has_slides
 
 class EventInfo(LinkInfo):
-    def __init__(self, frag, title, date=None):
+    def __init__(self, frag, title, date=None, icon=None):
         self.frag = frag
         self.title = title
         self.date = date
+        self.icon = icon
 
 def get_soup(url_fragment=u''):
     page = requests.get("http://online.kitp.ucsb.edu/online/{}".format(url_fragment))
@@ -51,6 +52,10 @@ def scrape_index(base, soup):
                 ns = thing.next_sibling
                 if ns:
                     event['date'] = mystrip(ns.string)
+            m = re.search(r'^([\w]+)/?$', event['frag'])
+            if m is not None:
+                progname = m.group(1)
+                event['icon'] = 'http://online.kitp.ucsb.edu/online/{progname}/{progname}-logo.jpg'.format(progname=progname)
             rv.append(EventInfo(**event))
     return rv
 
