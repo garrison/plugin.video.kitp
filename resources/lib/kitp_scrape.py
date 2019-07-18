@@ -32,8 +32,11 @@ class EventInfo(LinkInfo):
         self.date = date
         self.icon = icon
 
+def full_url(frag):
+    return u'http://online.kitp.ucsb.edu/online/{}'.format(frag)
+
 def get_soup(url_fragment=u''):
-    page = requests.get("http://online.kitp.ucsb.edu/online/{}".format(url_fragment))
+    page = requests.get(full_url(url_fragment))
     page.raise_for_status()
     soup = BeautifulSoup(page.text, "html5lib")
     base = page.url.partition('online/')[2]
@@ -57,7 +60,7 @@ def scrape_index(base, soup):
             m = re.search(r'^([\w]+)/?$', event['frag'])
             if m is not None:
                 progname = m.group(1)
-                event['icon'] = 'http://online.kitp.ucsb.edu/online/{progname}/{progname}-logo.jpg'.format(progname=progname)
+                event['icon'] = full_url('{progname}/{progname}-logo.jpg'.format(progname=progname))
             rv.append(EventInfo(**event))
     return rv
 
@@ -82,8 +85,8 @@ def scrape_event(base, soup):
         talk['has_video'] = u'[Cam]' in s
         talk['has_slides'] = u'[Slides]' in s
         talk['frag'] = urljoin(base, thing['href'])
-        talk['icon'] = 'http://online.kitp.ucsb.edu/online/{frag}oh/01.jpg'.format(frag=talk['frag'])
-        talk['fanart'] = 'http://online.kitp.ucsb.edu/online/{frag}tv/play_thumb.jpg'.format(frag=talk['frag'])
+        talk['icon'] = full_url('{frag}oh/01.jpg'.format(frag=talk['frag']))
+        talk['fanart'] = full_url('{frag}tv/play_thumb.jpg'.format(frag=talk['frag']))
         rv.append(TalkInfo(**talk))
     return rv
 
