@@ -43,6 +43,9 @@ def view_list(result):
             li = xbmcgui.ListItem(label=item.title)
             url = get_url(frag=item.frag)
             is_folder = True
+            li.setArt({
+                'icon': item.icon,
+            })
             xbmcplugin.addDirectoryItem(_handle, url, li, is_folder)
         elif isinstance(item, kitp_scrape.TalkInfo):
             li = xbmcgui.ListItem(label=u'{0}: {1}'.format(item.speaker, item.title))
@@ -51,6 +54,10 @@ def view_list(result):
             li.setInfo('video', {
                 'title': item.title,
                 'mediatype': 'video',
+            })
+            li.setArt({
+                'fanart': item.fanart,
+                'icon': item.icon,
             })
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(_handle, url, li, is_folder)

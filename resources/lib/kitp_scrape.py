@@ -16,12 +16,14 @@ class LinkInfo(object):
     pass
 
 class TalkInfo(LinkInfo):
-    def __init__(self, frag, title, speaker=None, has_video=None, has_slides=None):
+    def __init__(self, frag, title, speaker=None, has_video=None, has_slides=None, icon=None, fanart=None):
         self.frag = frag
         self.title = title
         self.speaker = speaker
         self.has_video = has_video
         self.has_slides = has_slides
+        self.icon = icon
+        self.fanart = fanart
 
 class EventInfo(LinkInfo):
     def __init__(self, frag, title, date=None, icon=None):
@@ -80,6 +82,8 @@ def scrape_event(base, soup):
         talk['has_video'] = u'[Cam]' in s
         talk['has_slides'] = u'[Slides]' in s
         talk['frag'] = urljoin(base, thing['href'])
+        talk['icon'] = 'http://online.kitp.ucsb.edu/online/{frag}oh/01.jpg'.format(frag=talk['frag'])
+        talk['fanart'] = 'http://online.kitp.ucsb.edu/online/{frag}tv/play_thumb.jpg'.format(frag=talk['frag'])
         rv.append(TalkInfo(**talk))
     return rv
 
