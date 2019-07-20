@@ -101,9 +101,13 @@ def scrape_event(base, soup):
 def scrape(frag):
     base, soup = get_soup(frag)
     # Is it a video?
-    video_urls = [a['href'] for a in soup.find_all('a', href=True) if "mp4" in a['href']]
+    video_urls = [a['href'] for a in soup.find_all('a', href=True) if "mp4" in a['href'] or a['href'] == 'options.html']
     if video_urls:
-        return VideoUrl(video_urls[0])
+        best = video_urls[0]
+        if best == 'options.html':
+            _, soup = get_soup(urljoin(frag, best))
+            best = [a['href'] for a in soup.find_all('a', href=True) if '.3gp' in a['href']][0]
+        return VideoUrl(urljoin(full_url(frag), best))
     # These indexes are straightforward to handle
     if base in ('', 'si-pgmsindex.html', 'si-minipindex.html', 'si-confindex.html'):
         return scrape_index(base, soup)
