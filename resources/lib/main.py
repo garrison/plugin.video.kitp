@@ -34,7 +34,8 @@ def handler(_type):
 
 @handler(kitp_scrape.List)
 def view_list(result):
-    xbmcplugin.setPluginCategory(_handle, 'xxx')
+    if result.title:
+        xbmcplugin.setPluginCategory(_handle, result.title)
     xbmcplugin.setContent(_handle, 'videos') # ???
     for item in result.items:
         if isinstance(item, kitp_scrape.EventInfo):

@@ -34,8 +34,9 @@ class EventInfo(LinkInfo):
 
 class List(object):
     """Can either be a list of talks or events"""
-    def __init__(self, items):
+    def __init__(self, items, title=None):
         self.items = items
+        self.title = title
 
 def full_url(frag):
     return u'http://online.kitp.ucsb.edu/online/{}'.format(frag)
@@ -67,7 +68,8 @@ def scrape_index(base, soup):
                 progname = m.group(1)
                 event['icon'] = full_url('{progname}/{progname}-logo.jpg'.format(progname=progname))
             items.append(EventInfo(**event))
-    return List(items)
+    title = soup.find('title').text
+    return List(items, title=title)
 
 def find_main_schedule_content(soup):
     attempt1 = soup.find(id='schedule')
@@ -93,7 +95,8 @@ def scrape_event(base, soup):
         talk['icon'] = full_url('{frag}oh/01.jpg'.format(frag=talk['frag']))
         talk['fanart'] = full_url('{frag}tv/play_thumb.jpg'.format(frag=talk['frag']))
         items.append(TalkInfo(**talk))
-    return List(items)
+    title = soup.find('title').text
+    return List(items, title=title)
 
 def scrape(frag):
     base, soup = get_soup(frag)
