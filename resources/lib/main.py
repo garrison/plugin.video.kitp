@@ -45,6 +45,7 @@ def view_list(result):
             is_folder = True
             li.setArt({
                 'icon': item.icon,
+                'thumb': item.icon,
             })
             xbmcplugin.addDirectoryItem(_handle, url, li, is_folder)
         elif isinstance(item, kitp_scrape.TalkInfo):
@@ -58,6 +59,7 @@ def view_list(result):
             li.setArt({
                 'fanart': item.fanart,
                 'icon': item.icon,
+                'thumb': item.icon,
             })
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(_handle, url, li, is_folder)
