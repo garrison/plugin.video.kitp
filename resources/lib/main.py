@@ -32,13 +32,11 @@ def handler(_type):
         return func
     return _handler
 
-# FIXME: instead of just returning a list, the scraper should also return some toplevel info about that the list actually is about!
-
-@handler(list)
+@handler(kitp_scrape.List)
 def view_list(result):
     xbmcplugin.setPluginCategory(_handle, 'xxx')
     xbmcplugin.setContent(_handle, 'videos') # ???
-    for item in result:
+    for item in result.items:
         if isinstance(item, kitp_scrape.EventInfo):
             li = xbmcgui.ListItem(label=item.title)
             url = get_url(frag=item.frag)

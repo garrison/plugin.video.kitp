@@ -32,6 +32,11 @@ class EventInfo(LinkInfo):
         self.date = date
         self.icon = icon
 
+class List(object):
+    """Can either be a list of talks or events"""
+    def __init__(self, items):
+        self.items = items
+
 def full_url(frag):
     return u'http://online.kitp.ucsb.edu/online/{}'.format(frag)
 
@@ -46,7 +51,7 @@ def mystrip(z):
     return re.sub(r'\s+', ' ', z).strip()
 
 def scrape_index(base, soup):
-    rv = []
+    items = []
     for ul in soup.find_all('ul'):
         for thing in ul.find_all('a', href=True):
             event = {}
@@ -61,8 +66,8 @@ def scrape_index(base, soup):
             if m is not None:
                 progname = m.group(1)
                 event['icon'] = full_url('{progname}/{progname}-logo.jpg'.format(progname=progname))
-            rv.append(EventInfo(**event))
-    return rv
+            items.append(EventInfo(**event))
+    return List(items)
 
 def find_main_schedule_content(soup):
     attempt1 = soup.find(id='schedule')
@@ -74,7 +79,7 @@ def find_main_schedule_content(soup):
     raise Exception('No content found')
 
 def scrape_event(base, soup):
-    rv = []
+    items = []
     for thing in find_main_schedule_content(soup).find_all('a', href=True):
         talk = {}
         s2 = list(thing.parent.previous_siblings)
@@ -87,8 +92,8 @@ def scrape_event(base, soup):
         talk['frag'] = urljoin(base, thing['href'])
         talk['icon'] = full_url('{frag}oh/01.jpg'.format(frag=talk['frag']))
         talk['fanart'] = full_url('{frag}tv/play_thumb.jpg'.format(frag=talk['frag']))
-        rv.append(TalkInfo(**talk))
-    return rv
+        items.append(TalkInfo(**talk))
+    return List(items)
 
 def scrape(frag):
     base, soup = get_soup(frag)
