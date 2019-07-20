@@ -55,6 +55,7 @@ def view_list(result):
             li.setInfo('video', {
                 'title': item.title,
                 'mediatype': 'video',
+                'plot': u'[UPPERCASE]{speaker}[/UPPERCASE][CR][CR][B]{title}[/B]'.format(speaker=item.speaker, title=item.title),
             })
             li.setArt({
                 'fanart': item.fanart,
