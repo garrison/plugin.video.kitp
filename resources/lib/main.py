@@ -39,9 +39,16 @@ def view_list(result):
     xbmcplugin.setContent(_handle, 'videos') # ???
     for item in result.items:
         if isinstance(item, kitp_scrape.EventInfo):
-            li = xbmcgui.ListItem(label=item.title)
+            abbr = item.frag.strip('/')
+            full_title = u'{title} ({abbr})'.format(title=item.title, abbr=abbr)
+            li = xbmcgui.ListItem(label=full_title)
             url = get_url(frag=item.frag)
             is_folder = True
+            li.setInfo('video', {
+                'title': full_title,
+                'mediatype': 'video',
+                'plot': abbr,
+            })
             li.setArt({
                 'icon': item.icon,
                 'thumb': item.icon,
