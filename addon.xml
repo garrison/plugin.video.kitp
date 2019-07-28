@@ -15,7 +15,7 @@
     <news>
       0.1 (in progress) Initial release
     </news>
-    <summary lang="en">KITP Videos</summary>
+    <summary lang="en">Videos from the Kavli Institute for Theoretical Physics</summary>
     <description lang="en">The Kavli Institute for Theoretical Physics (KITP) is a research institute of the University of California, Santa Barbara. KITP is one of the most renowned institutes for theoretical physics in the world, and brings theorists in physics and related fields together to work on topics at the forefront of theoretical science.  This plugin provides access to KITP's library of online talks.</description>
     <disclaimer lang="en">This plugin is not endorsed by KITP.</disclaimer>
     <assets>
