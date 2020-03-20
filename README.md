@@ -18,3 +18,16 @@ Credits
 `fanart.jpg` is adapted from [File:Kohn Hall, UCSB.jpg](https://commons.wikimedia.org/wiki/File:Kohn_Hall,_UCSB.jpg) on Wikimedia Commons by Jonathan Pfeiffer.  License is [CC-BY 2.0](https://creativecommons.org/licenses/by/2.0/deed.en).
 
 `icon.png` is adapted from [KITP's Twitter profile image](https://twitter.com/kitp_ucsb).
+
+Screenshots
+-----------
+
+![](screenshots/screenshot004.png?raw=true "")
+
+![](screenshots/screenshot000.png?raw=true "")
+
+![](screenshots/screenshot001.png?raw=true "")
+
+![](screenshots/screenshot002.png?raw=true "")
+
+![](screenshots/screenshot003.png?raw=true "")
