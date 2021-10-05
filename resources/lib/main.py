@@ -1,8 +1,11 @@
 # Based loosely on plugin.video.example
 
 import sys
-from urllib import urlencode
-from urlparse import parse_qsl
+from requests.compat import urlencode
+try:
+    from urlparse import parse_qsl
+except ImportError:
+    from urllib.parse import parse_qsl
 
 import xbmcgui
 import xbmcplugin
